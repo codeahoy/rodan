@@ -6,13 +6,25 @@ class ApiCall extends React.Component {
     constructor(){  
         super();  
         this.state = {  
-            url: 'http://...',
+            url: 'http://jsonplaceholder.typicode.com/users',
             method: 'GET',
         };  
    }
 
    handleButtonClick = event => {
-       this.setState({url: this.state.title})
+       this.setState({response: null });
+
+       fetch(this.state.url)
+       .then(res =>  { 
+           console.log(res);
+           return res.json() 
+        })
+       .then( (data) => {
+           //console.log(data);
+           this.setState({response: JSON.stringify(data, undefined, 2)});
+       }, reason => {
+           this.setState({response: 'error ' + reason });
+       })
 
    }
 
@@ -42,6 +54,7 @@ class ApiCall extends React.Component {
             <button onClick={this.handleButtonClick}>Call</button>
 
             <h3> {this.state.method}  {this.state.url} </h3>
+            <pre>{this.state.response}</pre>
         </div>
         );
     }
