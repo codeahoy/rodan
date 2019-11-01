@@ -9,7 +9,7 @@ class ApiCall extends React.Component {
         this.state = {  
             url: 'http://jsonplaceholder.typicode.com/users',
             method: 'GET',
-            headers: [{name: '', value: ''}]
+            headers: []
         };  
    }
 
@@ -49,25 +49,52 @@ class ApiCall extends React.Component {
 
     let indexToRemove = event.target.id;
     console.log('del =>' + indexToRemove);
-    if (indexToRemove > 0) {
+
+    if (indexToRemove >= 0) {
         let newArray = [];
 
-        console.log('length:' + this.state.headers.length);
+        console.log('headers length: '  + this.state.headers.length);
         for (let i=0; i<this.state.headers.length; i++) {
             if (i != indexToRemove) {
                 console.log('pushing: ' + this.state.headers[i]);
-                newArray[i] = this.state.headers[i];
-                //newArray.push(this.state.headers[i]);
+                newArray.push(this.state.headers[i]);
                 
             }
         }
 
-        console.log(newArray)
+        console.log('new array is: ' + newArray)
 
-        this.setState({headers: newArray});
+        this.setState( {
+            headers: newArray.slice()
+        })
+         
+
+        //this.setState({headers: newArray});
+
+        console.log('new headers array is: ' + this.state.headers)
     } 
 
   }
+
+  headerNameChange = event => {
+      let arr = this.state.headers.slice();
+      let index = event.target.id;
+
+      arr[index].name = event.target.value;
+
+      this.setState({headers: arr});
+  }
+
+  headerValueChange = event => {
+    let arr = this.state.headers.slice();
+    let index = event.target.id;
+
+    arr[index].value = event.target.value;
+
+    this.setState({headers: arr});
+}
+
+  
 
 
     render() {
@@ -99,7 +126,9 @@ class ApiCall extends React.Component {
                             type="text"
                             name={headerNameId}
                             data-id={key}
-                            id={headerNameId}
+                            id={key}
+                            onChange={this.headerNameChange}
+                            value={this.state.headers[key].name}
                             
                             />
 
@@ -107,7 +136,9 @@ class ApiCall extends React.Component {
                             type="text"
                             name={headerValueId}
                             data-id={key}
-                            id={headerValueId}
+                            id={key}
+                            onChange={this.headerValueChange}
+                            value={this.state.headers[key].value}
                  
                             />
                             <button id={key} onClick={this.removeHeader}>x</button>
