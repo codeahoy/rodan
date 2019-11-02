@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/umermansoor/rodan/static/css/main.d498bfb3.chunk.css",
+    "main.js": "/umermansoor/rodan/static/js/main.7a7df265.chunk.js",
+    "main.js.map": "/umermansoor/rodan/static/js/main.7a7df265.chunk.js.map",
+    "runtime-main.js": "/umermansoor/rodan/static/js/runtime-main.8e789405.js",
+    "runtime-main.js.map": "/umermansoor/rodan/static/js/runtime-main.8e789405.js.map",
+    "static/js/2.9cb7d1ec.chunk.js": "/umermansoor/rodan/static/js/2.9cb7d1ec.chunk.js",
+    "static/js/2.9cb7d1ec.chunk.js.map": "/umermansoor/rodan/static/js/2.9cb7d1ec.chunk.js.map",
+    "index.html": "/umermansoor/rodan/index.html",
+    "precache-manifest.bffe44416cd9cfb3f1d9c66b6a443179.js": "/umermansoor/rodan/precache-manifest.bffe44416cd9cfb3f1d9c66b6a443179.js",
+    "service-worker.js": "/umermansoor/rodan/service-worker.js",
+    "static/css/main.d498bfb3.chunk.css.map": "/umermansoor/rodan/static/css/main.d498bfb3.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8e789405.js",
+    "static/js/2.9cb7d1ec.chunk.js",
+    "static/css/main.d498bfb3.chunk.css",
+    "static/js/main.7a7df265.chunk.js"
+  ]
+}
