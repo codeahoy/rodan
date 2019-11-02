@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/codeahoy/rodan/static/css/main.d498bfb3.chunk.css",
-    "main.js": "/codeahoy/rodan/static/js/main.7a7df265.chunk.js",
-    "main.js.map": "/codeahoy/rodan/static/js/main.7a7df265.chunk.js.map",
-    "runtime-main.js": "/codeahoy/rodan/static/js/runtime-main.410e09ec.js",
-    "runtime-main.js.map": "/codeahoy/rodan/static/js/runtime-main.410e09ec.js.map",
-    "static/js/2.9cb7d1ec.chunk.js": "/codeahoy/rodan/static/js/2.9cb7d1ec.chunk.js",
-    "static/js/2.9cb7d1ec.chunk.js.map": "/codeahoy/rodan/static/js/2.9cb7d1ec.chunk.js.map",
-    "index.html": "/codeahoy/rodan/index.html",
-    "precache-manifest.5be80448941c6a72de64f20d887c895f.js": "/codeahoy/rodan/precache-manifest.5be80448941c6a72de64f20d887c895f.js",
-    "service-worker.js": "/codeahoy/rodan/service-worker.js",
-    "static/css/main.d498bfb3.chunk.css.map": "/codeahoy/rodan/static/css/main.d498bfb3.chunk.css.map"
+    "main.css": "/rodan/static/css/main.d498bfb3.chunk.css",
+    "main.js": "/rodan/static/js/main.7a7df265.chunk.js",
+    "main.js.map": "/rodan/static/js/main.7a7df265.chunk.js.map",
+    "runtime-main.js": "/rodan/static/js/runtime-main.0cc64f81.js",
+    "runtime-main.js.map": "/rodan/static/js/runtime-main.0cc64f81.js.map",
+    "static/js/2.9cb7d1ec.chunk.js": "/rodan/static/js/2.9cb7d1ec.chunk.js",
+    "static/js/2.9cb7d1ec.chunk.js.map": "/rodan/static/js/2.9cb7d1ec.chunk.js.map",
+    "index.html": "/rodan/index.html",
+    "precache-manifest.b236a8603665768740a8dec798a0d969.js": "/rodan/precache-manifest.b236a8603665768740a8dec798a0d969.js",
+    "service-worker.js": "/rodan/service-worker.js",
+    "static/css/main.d498bfb3.chunk.css.map": "/rodan/static/css/main.d498bfb3.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.410e09ec.js",
+    "static/js/runtime-main.0cc64f81.js",
     "static/js/2.9cb7d1ec.chunk.js",
     "static/css/main.d498bfb3.chunk.css",
     "static/js/main.7a7df265.chunk.js"
