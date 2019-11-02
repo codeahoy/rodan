@@ -7,7 +7,6 @@ class NameValueFields extends React.Component {
         this.state = {
             fields: [],
         }
-        
     }
     addfields = event => {
         this.setState((prevState) => ({
@@ -17,15 +16,13 @@ class NameValueFields extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-
         if (prevState.fields !== this.state.fields) {
             this.props.fieldsStateUpdatedCallback(this.state.fields.slice());
         }
-        
+
     }
 
     btnRemoveFields = event => {
-
         let indexToRemove = event.target.id;
 
         if (indexToRemove >= 0) {
@@ -37,7 +34,7 @@ class NameValueFields extends React.Component {
                 }
             }
 
-            this.setState({fields: newArray.slice()})
+            this.setState({ fields: newArray.slice() })
         }
     }
 
@@ -62,7 +59,7 @@ class NameValueFields extends React.Component {
     render() {
 
         return (
-            <div>
+            <div className="mt-3">
                 <h5>{this.props.headingText}</h5>
                 {
                     this.state.fields.map((val, key) => {

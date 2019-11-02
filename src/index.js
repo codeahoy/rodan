@@ -11,6 +11,7 @@ class Main extends React.Component {
             method: 'GET',
             headers: [],
             errors: [],
+            queryParams: [],
             showResult: false,
         };
     }
@@ -25,7 +26,7 @@ class Main extends React.Component {
             }
         });
 
-        return errors; 
+        return errors;
     }
 
     btnSubmitRestCall = event => {
@@ -44,7 +45,24 @@ class Main extends React.Component {
 
         this.setState({ response: 'fetching...' });
 
-        fetch(this.state.url, {
+        let queryParams = '';
+        if (this.state.queryParams.length > 0) {
+            queryParams = '?';
+            this.state.queryParams.map((item) => {
+                if (item.name.length > 0) {
+                    queryParams = queryParams + item.name + '=' + item.value + '&';
+                }
+
+                return item; // To get rid of warning
+            });
+            queryParams = queryParams.slice(0, -1); // Delete last ampersand (&)
+        }
+
+        let url = this.state.url + queryParams;
+
+        console.log(url);
+
+        fetch(url, {
             method: this.state.method,
             headers: Object.assign({}, ...this.state.headers.map(item => ({ [item.name]: item.value }))),
 
@@ -66,6 +84,20 @@ class Main extends React.Component {
         this.setState({ headers: headersCopy })
     }
 
+    queryParamsStateUpdated = (paramsCopy) => {
+        this.setState({ queryParams: paramsCopy })
+    }
+
+    addDemoGetWithQueryParams = () => {
+
+        this.setState({
+            queryParams: [{name: 'symbols', value: 'USD,GBP'}],
+            url: 'https://api.exchangeratesapi.io/latest',
+        });
+    }
+    
+
+
     render() {
         return (
 
@@ -74,7 +106,10 @@ class Main extends React.Component {
                     <div className="col-lg-1"></div>
                     <div className="col-lg-5">
 
-                        <select value={this.state.method} onChange={(e) => this.setState({ method: e.target.value })}>
+                        <select
+                            value={this.state.method}
+                            onChange={(e) => this.setState({ method: e.target.value })}>
+
                             <option value="POST">POST</option>
                             <option value="GET">GET</option>
                             <option value="PUT">PUT</option>
@@ -85,10 +120,21 @@ class Main extends React.Component {
                             onChange={(e) => this.setState({ url: e.target.value })}
                         />
                         <button onClick={this.btnSubmitRestCall}>Call</button>
-
                         <br />
 
-                        <NameValueFields headingText='HTTP Header' buttonText='Add Headers' fieldsStateUpdatedCallback={this.headersStateUpdated} />
+                        <NameValueFields
+                            headingText='HTTP Header'
+                            buttonText='Add Headers'
+                            fieldsStateUpdatedCallback={this.headersStateUpdated} />
+
+                        <NameValueFields
+                            headingText='Query Parameters'
+                            buttonText='Add Parameters'
+                            fieldsStateUpdatedCallback={this.queryParamsStateUpdated}
+                            initialValues={this.state.queryParams.slice()} />
+
+                        <button className='mt-4' onClick={this.addDemoGetWithQueryParams}>GET w/ query params</button>
+
 
                     </div>
                     <div className="col-lg-5">
@@ -108,6 +154,8 @@ class Main extends React.Component {
                                 message={this.state.response}
                             />
                         }
+
+
 
                     </div>
                     <div className="col-lg-1"></div>
