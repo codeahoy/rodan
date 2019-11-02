@@ -64,23 +64,18 @@ class Main extends React.Component {
         }
 
         let url = this.state.url + queryParams;
-
-        
-        
+        console.log(url);
 
         // Assign headers array from the state
         let headers = Object.assign({}, ...this.state.headers.map(item => ({ [item.name]: item.value })));
 
         // Assign authorization array from the state
-
         if (this.state.auth.type != null && this.state.auth.type === 'basic') {
             console.log('adding auth')
             headers = Object.assign(headers, {
                 'Authorization': 'Basic ' + encode (this.state.auth.username + ":" + this.state.auth.password)
             });
         }
-
-        console.log(url);
 
         fetch(url, {
             method: this.state.method,
@@ -160,12 +155,14 @@ class Main extends React.Component {
                         </div>
                         
                         </form>
-                        
-                        <br />
+
+                        <hr/>
 
                         <AuthorizationFields 
                         auth={this.state.auth} 
                         authStateUpdatedCallback={this.authStateUpdated} />
+
+<hr/>
 
                         <NameValueFields
                             headingText='HTTP Header'
@@ -173,11 +170,15 @@ class Main extends React.Component {
                             fieldsStateUpdatedCallback={this.headersStateUpdated}
                             initialValues={this.state.headers.slice()} />
 
+<hr/>
+
                         <NameValueFields
                             headingText='Query Parameters'
                             buttonText='Add Parameters'
                             fieldsStateUpdatedCallback={this.queryParamsStateUpdated}
                             initialValues={this.state.queryParams.slice()} />
+
+<hr/>
 
                         <h4 className="mt-4"> Examples </h4>
 

@@ -83,10 +83,10 @@ class AuthorizationFields extends React.Component {
 
                 {
                     this.auth.type === 'basic' ?
-                    <>
+                    <div className="mt-1">
                         <input
                             type="text"
-                            className=""
+                            className="mx-1"
                             name="username"
                             value={this.auth.username}
                             placeholder="Username"
@@ -95,7 +95,7 @@ class AuthorizationFields extends React.Component {
                         /> 
                         <input
                             type="text"
-                            className=""
+                            className="mt-1"
                             name="password"
                             value={this.auth.password}
                             placeholder="Password"
@@ -103,7 +103,7 @@ class AuthorizationFields extends React.Component {
 
                         /> 
 
-                    </>
+                    </div>
                         
                         :
                         <div></div>}

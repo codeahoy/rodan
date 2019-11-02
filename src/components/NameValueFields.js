@@ -70,6 +70,7 @@ class NameValueFields extends React.Component {
                         return (
                             <div className="mt-1" key={key}>
                                 <input
+                                    className="mx-1"
                                     type="text"
                                     id={key}
                                     onChange={this.inputNameChange}
