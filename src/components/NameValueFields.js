@@ -1,26 +1,24 @@
 import React from 'react';
 
 class NameValueFields extends React.Component {
-
     constructor(props) {
         super(props);
-        this.state = {
-            fields: [],
-        }
+        this.fields = this.props.initialValues;
     }
+
+  
     addfields = event => {
-        this.setState((prevState) => ({
-            fields: [...prevState.fields, { name: '', value: '' }]
-        })
-        );
+        this.fields.push({ name: '', value: '' });
+
+        this.props.fieldsStateUpdatedCallback(this.fields);
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.fields !== this.state.fields) {
-            this.props.fieldsStateUpdatedCallback(this.state.fields.slice());
-        }
-
+    shouldComponentUpdate(nextProps, nextState) {
+        this.fields = nextProps.initialValues;
+        console.log('call ' + JSON.stringify(nextProps.initialValues));
+        return true;
     }
+
 
     btnRemoveFields = event => {
         let indexToRemove = event.target.id;
@@ -28,48 +26,54 @@ class NameValueFields extends React.Component {
         if (indexToRemove >= 0) {
             let newArray = [];
 
-            for (let i = 0; i < this.state.fields.length; i++) {
+            for (let i = 0; i <  this.fields.length; i++) {
                 if (i != indexToRemove) {
-                    newArray.push(this.state.fields[i]);
+                    newArray.push( this.fields[i]);
                 }
             }
 
-            this.setState({ fields: newArray.slice() })
+            this.fields = newArray;
         }
+
+        this.props.fieldsStateUpdatedCallback(this.fields);
     }
 
+   
+
     inputNameChange = event => {
-        let arr = this.state.fields.slice();
+        let arr =  this.fields.slice();
         let index = event.target.id;
 
         arr[index].name = event.target.value;
 
-        this.setState({ fields: arr });
+        this.fields = arr;
+        this.props.fieldsStateUpdatedCallback(this.fields);
     }
 
     inputValueChange = event => {
-        let arr = this.state.fields.slice();
+        let arr = this.fields.slice();
         let index = event.target.id;
 
         arr[index].value = event.target.value;
 
-        this.setState({ fields: arr });
+        this.fields = arr;
+        this.props.fieldsStateUpdatedCallback(this.fields);
     }
 
     render() {
 
         return (
-            <div className="mt-3">
+            <div className="mt-3" key={this.props.initialValues}>
                 <h5>{this.props.headingText}</h5>
                 {
-                    this.state.fields.map((val, key) => {
+                    this.fields.map((val, key) => {
                         return (
                             <div className="mt-1" key={key}>
                                 <input
                                     type="text"
                                     id={key}
                                     onChange={this.inputNameChange}
-                                    value={this.state.fields[key].name}
+                                    value={this.fields[key].name}
 
                                 />
 
@@ -77,7 +81,7 @@ class NameValueFields extends React.Component {
                                     type="text"
                                     id={key}
                                     onChange={this.inputValueChange}
-                                    value={this.state.fields[key].value}
+                                    value={this.fields[key].value}
                                 />
                                 <button id={key} onClick={this.btnRemoveFields}>x</button>
                             </div>

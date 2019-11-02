@@ -91,11 +91,12 @@ class Main extends React.Component {
     addDemoGetWithQueryParams = () => {
 
         this.setState({
+            headers: [],
             queryParams: [{name: 'symbols', value: 'USD,GBP'}],
             url: 'https://api.exchangeratesapi.io/latest',
         });
     }
-    
+
 
 
     render() {
@@ -125,7 +126,8 @@ class Main extends React.Component {
                         <NameValueFields
                             headingText='HTTP Header'
                             buttonText='Add Headers'
-                            fieldsStateUpdatedCallback={this.headersStateUpdated} />
+                            fieldsStateUpdatedCallback={this.headersStateUpdated} 
+                            initialValues={this.state.headers.slice()} />
 
                         <NameValueFields
                             headingText='Query Parameters'
@@ -133,7 +135,9 @@ class Main extends React.Component {
                             fieldsStateUpdatedCallback={this.queryParamsStateUpdated}
                             initialValues={this.state.queryParams.slice()} />
 
-                        <button className='mt-4' onClick={this.addDemoGetWithQueryParams}>GET w/ query params</button>
+                            <h4 className="mt-4"> Examples </h4>
+
+                        <a href="#" onClick={this.addDemoGetWithQueryParams}>Exchange Rate (Query Parameter)</a>
 
 
                     </div>
