@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "15d8474f24b5b5edf3617fc949c93d20",
+    "revision": "b16f24b438d429d9b3a68512109eface",
     "url": "/rodan/index.html"
   },
   {
-    "revision": "69bea1f2418bbe2886f9",
+    "revision": "22a4c5e5417d4a36fbb9",
     "url": "/rodan/static/css/main.d498bfb3.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/rodan/static/js/2.9cb7d1ec.chunk.js"
   },
   {
-    "revision": "69bea1f2418bbe2886f9",
-    "url": "/rodan/static/js/main.43c4f936.chunk.js"
+    "revision": "22a4c5e5417d4a36fbb9",
+    "url": "/rodan/static/js/main.7b160b21.chunk.js"
   },
   {
     "revision": "6c36316c446f511b8515",
