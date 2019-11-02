@@ -7,7 +7,7 @@ class Main extends React.Component {
     constructor() {
         super();
         this.state = {
-            url: 'http://jsonplaceholder.typicode.com/users',
+            url: 'https://jsonplaceholder.typicode.com/users',
             method: 'GET',
             headers: [],
             errors: [],
