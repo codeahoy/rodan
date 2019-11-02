@@ -15,7 +15,7 @@ class NameValueFields extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         this.fields = nextProps.initialValues;
-        console.log('call ' + JSON.stringify(nextProps.initialValues));
+        //console.log('call ' + JSON.stringify(nextProps.initialValues));
         return true;
     }
 

@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import NameValueFields from './components/NameValueFields';
+import AuthorizationFields from './components/AuthorizationFields';
+import { encode } from "base-64";
 
 class Main extends React.Component {
     constructor() {
@@ -13,6 +15,7 @@ class Main extends React.Component {
             errors: [],
             queryParams: [],
             showResult: false,
+            auth: {}
         };
     }
 
@@ -30,6 +33,8 @@ class Main extends React.Component {
     }
 
     btnSubmitRestCall = event => {
+
+        event.preventDefault();
 
         // This will show the results section
         this.setState({ showResult: true });
@@ -60,11 +65,26 @@ class Main extends React.Component {
 
         let url = this.state.url + queryParams;
 
+        
+        
+
+        // Assign headers array from the state
+        let headers = Object.assign({}, ...this.state.headers.map(item => ({ [item.name]: item.value })));
+
+        // Assign authorization array from the state
+
+        if (this.state.auth.type != null && this.state.auth.type === 'basic') {
+            console.log('adding auth')
+            headers = Object.assign(headers, {
+                'Authorization': 'Basic ' + encode (this.state.auth.username + ":" + this.state.auth.password)
+            });
+        }
+
         console.log(url);
 
         fetch(url, {
             method: this.state.method,
-            headers: Object.assign({}, ...this.state.headers.map(item => ({ [item.name]: item.value }))),
+            headers: headers,
 
         }
         )
@@ -92,12 +112,18 @@ class Main extends React.Component {
 
         this.setState({
             headers: [],
-            queryParams: [{name: 'symbols', value: 'USD,GBP'}],
+            queryParams: [{ name: 'symbols', value: 'USD,GBP' }],
             url: 'https://api.exchangeratesapi.io/latest',
         });
     }
 
+    authStateUpdated = (authCopy) => {
+        console.log('authStateUpdated');
+        this.setState({
+            auth: authCopy
+        });
 
+    }
 
     render() {
         return (
@@ -107,7 +133,10 @@ class Main extends React.Component {
                     <div className="col-lg-1"></div>
                     <div className="col-lg-5">
 
-                        <select
+                        <form class="form-inline">
+                            <div class="form-group mb-2">
+                            <select
+                            className="custom-select"
                             value={this.state.method}
                             onChange={(e) => this.setState({ method: e.target.value })}>
 
@@ -115,18 +144,33 @@ class Main extends React.Component {
                             <option value="GET">GET</option>
                             <option value="PUT">PUT</option>
                         </select>
-                        <input
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                            <input
                             type="text"
+                            className="input-xxlarge"
                             value={this.state.url}
+                        
                             onChange={(e) => this.setState({ url: e.target.value })}
                         />
-                        <button onClick={this.btnSubmitRestCall}>Call</button>
+                            </div>
+
+                            <div class="form-group mb-2">
+                            <button className="btn btn-primary mb-2" onClick={this.btnSubmitRestCall}>Call</button>
+                        </div>
+                        
+                        </form>
+                        
                         <br />
+
+                        <AuthorizationFields 
+                        auth={this.state.auth} 
+                        authStateUpdatedCallback={this.authStateUpdated} />
 
                         <NameValueFields
                             headingText='HTTP Header'
                             buttonText='Add Headers'
-                            fieldsStateUpdatedCallback={this.headersStateUpdated} 
+                            fieldsStateUpdatedCallback={this.headersStateUpdated}
                             initialValues={this.state.headers.slice()} />
 
                         <NameValueFields
@@ -135,7 +179,7 @@ class Main extends React.Component {
                             fieldsStateUpdatedCallback={this.queryParamsStateUpdated}
                             initialValues={this.state.queryParams.slice()} />
 
-                            <h4 className="mt-4"> Examples </h4>
+                        <h4 className="mt-4"> Examples </h4>
 
                         <a href="#" onClick={this.addDemoGetWithQueryParams}>Exchange Rate (Query Parameter)</a>
 
