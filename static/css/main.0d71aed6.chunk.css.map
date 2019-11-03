@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,aACI,kBACF,CAEA,gBACE,qBACJ","file":"main.0d71aed6.chunk.css","sourcesContent":[".flex-shrink {\n    flex: 0 !important;\n  }\n\n  #rawBodyContent {\n    font-family: monospace;\n}\n  "]}

@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/rodan/static/css/main.b39475b0.chunk.css",
-    "main.js": "/rodan/static/js/main.c95459ec.chunk.js",
-    "main.js.map": "/rodan/static/js/main.c95459ec.chunk.js.map",
+    "main.css": "/rodan/static/css/main.0d71aed6.chunk.css",
+    "main.js": "/rodan/static/js/main.57eddf2f.chunk.js",
+    "main.js.map": "/rodan/static/js/main.57eddf2f.chunk.js.map",
     "runtime-main.js": "/rodan/static/js/runtime-main.0cc64f81.js",
     "runtime-main.js.map": "/rodan/static/js/runtime-main.0cc64f81.js.map",
     "static/js/2.f93f7ea8.chunk.js": "/rodan/static/js/2.f93f7ea8.chunk.js",
     "static/js/2.f93f7ea8.chunk.js.map": "/rodan/static/js/2.f93f7ea8.chunk.js.map",
     "index.html": "/rodan/index.html",
-    "precache-manifest.81571e879f5f7eb7a8b510a5e090482d.js": "/rodan/precache-manifest.81571e879f5f7eb7a8b510a5e090482d.js",
+    "precache-manifest.649c68cb88abf6db15ad73fd30c1944f.js": "/rodan/precache-manifest.649c68cb88abf6db15ad73fd30c1944f.js",
     "service-worker.js": "/rodan/service-worker.js",
-    "static/css/main.b39475b0.chunk.css.map": "/rodan/static/css/main.b39475b0.chunk.css.map"
+    "static/css/main.0d71aed6.chunk.css.map": "/rodan/static/css/main.0d71aed6.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.0cc64f81.js",
     "static/js/2.f93f7ea8.chunk.js",
-    "static/css/main.b39475b0.chunk.css",
-    "static/js/main.c95459ec.chunk.js"
+    "static/css/main.0d71aed6.chunk.css",
+    "static/js/main.57eddf2f.chunk.js"
   ]
 }
