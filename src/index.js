@@ -73,7 +73,7 @@ class Main extends React.Component {
         if (this.state.auth.type != null && this.state.auth.type === 'basic') {
             console.log('adding auth')
             headers = Object.assign(headers, {
-                'Authorization': 'Basic ' + encode (this.state.auth.username + ":" + this.state.auth.password)
+                'Authorization': 'Basic ' + encode(this.state.auth.username + ":" + this.state.auth.password)
             });
         }
 
@@ -128,41 +128,30 @@ class Main extends React.Component {
                     <div className="col-lg-1"></div>
                     <div className="col-lg-5">
 
-                        <form class="form-inline">
-                            <div class="form-group mb-2">
+                        <div class="input-group">
                             <select
-                            className="custom-select"
-                            value={this.state.method}
-                            onChange={(e) => this.setState({ method: e.target.value })}>
+                                className="custom-select flex-shrink w-auto"
+                                value={this.state.method}
+                                onChange={(e) => this.setState({ method: e.target.value })}>
 
-                            <option value="POST">POST</option>
-                            <option value="GET">GET</option>
-                            <option value="PUT">PUT</option>
-                        </select>
-                            </div>
-                            <div class="form-group mx-sm-3 mb-2">
-                            <input
-                            type="text"
-                            className="input-xxlarge"
-                            value={this.state.url}
-                        
-                            onChange={(e) => this.setState({ url: e.target.value })}
-                        />
-                            </div>
+                                <option value="POST">POST</option>
+                                <option value="GET">GET</option>
+                                <option value="PUT">PUT</option>
+                            </select>
 
-                            <div class="form-group mb-2">
-                            <button className="btn btn-primary mb-2" onClick={this.btnSubmitRestCall}>Call</button>
+                            <input type="text" value={this.state.url} placeholder="HTTP URL" class="form-control" onChange={(e) => this.setState({ url: e.target.value })} />
+                            <span class="input-group-btn ml-1"><input type="button" value="Call" class="btn btn-primary" onClick={this.btnSubmitRestCall} /></span>
                         </div>
-                        
-                        </form>
 
-                        <hr/>
 
-                        <AuthorizationFields 
-                        auth={this.state.auth} 
-                        authStateUpdatedCallback={this.authStateUpdated} />
 
-<hr/>
+                        <hr />
+
+                        <AuthorizationFields
+                            auth={this.state.auth}
+                            authStateUpdatedCallback={this.authStateUpdated} />
+
+                        <hr />
 
                         <NameValueFields
                             headingText='HTTP Header'
@@ -170,7 +159,7 @@ class Main extends React.Component {
                             fieldsStateUpdatedCallback={this.headersStateUpdated}
                             initialValues={this.state.headers.slice()} />
 
-<hr/>
+                        <hr />
 
                         <NameValueFields
                             headingText='Query Parameters'
@@ -178,7 +167,7 @@ class Main extends React.Component {
                             fieldsStateUpdatedCallback={this.queryParamsStateUpdated}
                             initialValues={this.state.queryParams.slice()} />
 
-<hr/>
+                        <hr />
 
                         <h4 className="mt-4"> Examples </h4>
 
