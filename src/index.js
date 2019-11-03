@@ -4,6 +4,8 @@ import './index.css';
 import NameValueFields from './components/NameValueFields';
 import AuthorizationFields from './components/AuthorizationFields';
 import { encode } from "base-64";
+import RequestBody from './components/RequestBody';
+import { defaultBodyObject } from './utils';
 
 class Main extends React.Component {
     constructor() {
@@ -15,7 +17,8 @@ class Main extends React.Component {
             errors: [],
             queryParams: [],
             showResult: false,
-            auth: {}
+            auth: {},
+            body: defaultBodyObject
         };
     }
 
@@ -77,21 +80,57 @@ class Main extends React.Component {
             });
         }
 
-        fetch(url, {
-            method: this.state.method,
-            headers: headers,
+        // Add request body if it's selected
+        let body = Object.assign({}, JSON.stringify(this.state.body.content));
+        if (this.state.body.type !== 'no') {
+            if (this.state.body.type === 'raw') {
+                let contentType = {};
+                switch (this.state.body.contentType) {
+                    case 'raw-json':
+                        contentType = { 'Content-Type': 'application/json' };
+                        break;
+                    case 'raw-xml':
+                        contentType = { 'Content-Type': 'application/xml' };
+                        break;
+                    case 'raw-javacript':
+                        contentType = { 'Content-Type': 'application/javascript' };
+                        break;
 
+                    default:
+                        contentType = { 'Content-Type': 'application/text' };
+                }
+
+                headers = Object.assign(headers, contentType);
+
+            }
         }
-        )
+
+        let fetchOptions = {
+            method: this.state.method,
+            headers: headers
+        }
+
+        if (this.state.method !== 'GET' && body.type !== 'no') {
+            fetchOptions = Object.assign(fetchOptions, { body: body })
+        }
+
+
+
+
+        fetch(url, fetchOptions)
             .then(res => {
-                console.log(res);
-                return res.json()
+                if (res === undefined) {
+                    this.setState({ response: '' })
+                } else {
+                    return res.json()
+                }
             })
             .then((data) => {
-                //console.log(data);
+                console.log(data);
                 this.setState({ response: JSON.stringify(data, undefined, 2) });
             }, reason => {
                 this.setState({ response: 'error ' + reason });
+
             })
     }
 
@@ -120,6 +159,13 @@ class Main extends React.Component {
 
     }
 
+    bodyComponentUpdated = (bodyCopy) => {
+        console.log('body updated');
+        this.setState({
+            body: bodyCopy
+        })
+    }
+
     render() {
         return (
 
@@ -128,7 +174,7 @@ class Main extends React.Component {
                     <div className="col-lg-1"></div>
                     <div className="col-lg-5">
 
-                        <div class="input-group">
+                        <div className="input-group">
                             <select
                                 className="custom-select flex-shrink w-auto"
                                 value={this.state.method}
@@ -139,8 +185,8 @@ class Main extends React.Component {
                                 <option value="PUT">PUT</option>
                             </select>
 
-                            <input type="text" value={this.state.url} placeholder="HTTP URL" class="form-control" onChange={(e) => this.setState({ url: e.target.value })} />
-                            <span class="input-group-btn ml-1"><input type="button" value="Call" class="btn btn-primary" onClick={this.btnSubmitRestCall} /></span>
+                            <input type="text" value={this.state.url} placeholder="HTTP URL" className="form-control" onChange={(e) => this.setState({ url: e.target.value })} />
+                            <span className="input-group-btn ml-1"><input type="button" value="Call" className="btn btn-primary" onClick={this.btnSubmitRestCall} /></span>
                         </div>
 
 
@@ -168,6 +214,11 @@ class Main extends React.Component {
                             initialValues={this.state.queryParams.slice()} />
 
                         <hr />
+
+                        <RequestBody
+                            body={this.state.body}
+                            onComponentParamsUpdate={this.bodyComponentUpdated} />
+
 
                         <h4 className="mt-4"> Examples </h4>
 
@@ -213,7 +264,7 @@ class ResultsSection extends React.Component {
         return (
             <>
                 <h5> {`Result: ${this.props.heading}`}  </h5>
-                <pre>{this.props.message}</pre>
+                <pre class="prettyprint">{this.props.message}</pre>
             </>
         );
     }

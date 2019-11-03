@@ -63,7 +63,7 @@ class AuthorizationFields extends React.Component {
     // local variable to the new value passed in props to this method.
     shouldComponentUpdate(nextProps, nextState) {
         this.auth = nextProps.auth;
-        console.log(`shouldComponentUpdate : ${JSON.stringify(this.auth)} next: ${JSON.stringify(nextProps.auth)}`);
+        //console.log(`shouldComponentUpdate : ${JSON.stringify(this.auth)} next: ${JSON.stringify(nextProps.auth)}`);
         return true;
     }
 

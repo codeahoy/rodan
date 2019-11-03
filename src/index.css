@@ -1,4 +1,8 @@
 .flex-shrink {
     flex: 0 !important;
   }
+
+  #rawBodyContent {
+    font-family: monospace;
+}
   
