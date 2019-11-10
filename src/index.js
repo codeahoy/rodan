@@ -5,7 +5,12 @@ import NameValueFields from './components/NameValueFields';
 import AuthorizationFields from './components/AuthorizationFields';
 import { encode } from "base-64";
 import RequestBody from './components/RequestBody';
-import { defaultBodyObject } from './utils';
+import { defaultBodyObject, rodanExtensionId, bufferToString, base64ToBuffer } from './utils';
+import ExampleRestCalls from './components/ExampleRestCalls';
+import LJSON from 'ljson';
+import RodanResponse from './http/RodanResponse';
+
+
 
 class Main extends React.Component {
     constructor() {
@@ -81,7 +86,7 @@ class Main extends React.Component {
         }
 
         // Add request body if it's selected
-        let body = Object.assign({}, JSON.stringify(this.state.body.content));
+        let body = this.state.body.content;
         if (this.state.body.type !== 'no') {
             if (this.state.body.type === 'raw') {
                 let contentType = {};
@@ -101,7 +106,6 @@ class Main extends React.Component {
                 }
 
                 headers = Object.assign(headers, contentType);
-
             }
         }
 
@@ -111,27 +115,43 @@ class Main extends React.Component {
         }
 
         if (this.state.method !== 'GET' && body.type !== 'no') {
-            fetchOptions = Object.assign(fetchOptions, { body: body })
+            fetchOptions =
+                Object.assign(fetchOptions, { body: body })
+        }
+
+
+        try {
+            window.chrome.runtime.sendMessage(
+                rodanExtensionId,
+                { url: url, options: fetchOptions },
+                res => {
+                    console.log({res})
+
+                    if (res._fetchSuceeded === true ) {
+                        const response = new RodanResponse();
+                        response.bodyFromBase64(res._base64Body);
+                        response.code = res._statusCode;
+                        response.headers = new Map(JSON.parse(res._headers));
+
+                        console.log({ response })
+
+                        const json = response.getBodyAsJson();
+
+                        this.setState({ response: JSON.stringify(json) });
+                    } else {
+                        this.setState({ response: `error connection to ${this.state.url}` });
+                    }
+
+
+                }
+            );
+        } catch (err) { // extension not found
+            console.log(err)
         }
 
 
 
 
-        fetch(url, fetchOptions)
-            .then(res => {
-                if (res === undefined) {
-                    this.setState({ response: '' })
-                } else {
-                    return res.json()
-                }
-            })
-            .then((data) => {
-                console.log(data);
-                this.setState({ response: JSON.stringify(data, undefined, 2) });
-            }, reason => {
-                this.setState({ response: 'error ' + reason });
-
-            })
     }
 
     headersStateUpdated = (headersCopy) => {
@@ -142,14 +162,7 @@ class Main extends React.Component {
         this.setState({ queryParams: paramsCopy })
     }
 
-    addDemoGetWithQueryParams = () => {
 
-        this.setState({
-            headers: [],
-            queryParams: [{ name: 'symbols', value: 'USD,GBP' }],
-            url: 'https://api.exchangeratesapi.io/latest',
-        });
-    }
 
     authStateUpdated = (authCopy) => {
         console.log('authStateUpdated');
@@ -157,6 +170,10 @@ class Main extends React.Component {
             auth: authCopy
         });
 
+    }
+
+    stateUpdated = (stateCopy) => {
+        this.setState({ ...this.state, ...stateCopy });
     }
 
     bodyComponentUpdated = (bodyCopy) => {
@@ -219,11 +236,10 @@ class Main extends React.Component {
                             body={this.state.body}
                             onComponentParamsUpdate={this.bodyComponentUpdated} />
 
+                        <hr />
 
-                        <h4 className="mt-4"> Examples </h4>
-
-                        <a href="#" onClick={this.addDemoGetWithQueryParams}>Exchange Rate (Query Parameter)</a>
-
+                        <ExampleRestCalls
+                            stateUpdatedCallback={this.stateUpdated} />
 
                     </div>
                     <div className="col-lg-5">
