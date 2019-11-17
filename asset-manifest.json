@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/rodan/static/css/main.0d71aed6.chunk.css",
-    "main.js": "/rodan/static/js/main.57c207d3.chunk.js",
-    "main.js.map": "/rodan/static/js/main.57c207d3.chunk.js.map",
-    "runtime-main.js": "/rodan/static/js/runtime-main.0cc64f81.js",
-    "runtime-main.js.map": "/rodan/static/js/runtime-main.0cc64f81.js.map",
-    "static/js/2.7c0e87c5.chunk.js": "/rodan/static/js/2.7c0e87c5.chunk.js",
-    "static/js/2.7c0e87c5.chunk.js.map": "/rodan/static/js/2.7c0e87c5.chunk.js.map",
-    "index.html": "/rodan/index.html",
-    "precache-manifest.b2a1485ddf21e011a3885b4d2b02a9e7.js": "/rodan/precache-manifest.b2a1485ddf21e011a3885b4d2b02a9e7.js",
-    "service-worker.js": "/rodan/service-worker.js",
-    "static/css/main.0d71aed6.chunk.css.map": "/rodan/static/css/main.0d71aed6.chunk.css.map"
+    "main.css": "/rodan-publish/static/css/main.0d71aed6.chunk.css",
+    "main.js": "/rodan-publish/static/js/main.57c207d3.chunk.js",
+    "main.js.map": "/rodan-publish/static/js/main.57c207d3.chunk.js.map",
+    "runtime-main.js": "/rodan-publish/static/js/runtime-main.54ac6f7a.js",
+    "runtime-main.js.map": "/rodan-publish/static/js/runtime-main.54ac6f7a.js.map",
+    "static/js/2.7c0e87c5.chunk.js": "/rodan-publish/static/js/2.7c0e87c5.chunk.js",
+    "static/js/2.7c0e87c5.chunk.js.map": "/rodan-publish/static/js/2.7c0e87c5.chunk.js.map",
+    "index.html": "/rodan-publish/index.html",
+    "precache-manifest.dd03d3464fe4c616a356da425ccab43a.js": "/rodan-publish/precache-manifest.dd03d3464fe4c616a356da425ccab43a.js",
+    "service-worker.js": "/rodan-publish/service-worker.js",
+    "static/css/main.0d71aed6.chunk.css.map": "/rodan-publish/static/css/main.0d71aed6.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.0cc64f81.js",
+    "static/js/runtime-main.54ac6f7a.js",
     "static/js/2.7c0e87c5.chunk.js",
     "static/css/main.0d71aed6.chunk.css",
     "static/js/main.57c207d3.chunk.js"
