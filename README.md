@@ -1,10 +1,6 @@
-## Rodan 
+## rodan-publish
 
-Learning React
-
-## Development Roadmap
-
-
+This repo is for publishing rodan to GH pages.
 
 
 
