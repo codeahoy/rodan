@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/rodan-publish/precache-manifest.1585a23aa1169a527b3597d3078e4d7c.js"
+  "/rodan-publish/precache-manifest.e87e5639703d2124fcf629c85855ef3f.js"
 );
 
 self.addEventListener('message', (event) => {
